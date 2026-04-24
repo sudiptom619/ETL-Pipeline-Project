@@ -19,7 +19,7 @@ def connect_aws():
 
 def connect_mysql():
     engine = create_engine(
-        f"mysql+mysqlconnector://root:{password}%40@0.tcp.in.ngrok.io:11099/supermarket "
+        f"mysql+mysqlconnector://root:{password}%40@0.tcp.in.ngrok.io:16747/supermarket "
     )
     return engine
 
@@ -39,6 +39,8 @@ mysql_engine = connect_mysql()
 invoices = fetch_table("invoices")
 orderleads = fetch_table("orderleads")
 salesteam = fetch_table("salesteam")
+insert_table_to_aws(orderleads, "orderleads")
+insert_table_to_aws(salesteam, "salesteam")
 insert_table_to_aws(invoices, "invoices")
 
 print(invoices.shape, orderleads.shape, salesteam.shape, sep=" ")
